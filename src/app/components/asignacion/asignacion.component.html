@@ -1,0 +1,22 @@
+<!--la pantalla principal de asignacion-->
+<div class="container">
+  <h1>Asignación de recursos</h1>
+</div>
+
+<!--botton de asignacion/ es la clase que debe de tomar-->
+<div class="container">
+  <button [class.btn-success]="!collapseEmpleado" [class.btn-secondary]="collapseEmpleado" (click)="collapseEmpleado = !collapseEmpleado" class="btn m-2" type="button" data-bs-toggle="collapse" show data-bs-target=".multi-collapse" aria-expanded="true" aria-controls="formRecurso formRecurso">Búsqueda por Empleado</button>
+  <button [class.btn-success]="collapseEmpleado" [class.btn-secondary]="!collapseEmpleado" (click)="collapseEmpleado = !collapseEmpleado" class="btn btn-success m-2" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="formRecurso formRecurso">Búsqueda por Recurso</button>
+</div>
+<!--habilita la busqueda por empleado y o recurso-->
+<div class="show multi-collapse" id="formEmpleado" [hidden]="collapseEmpleado">
+  <app-busqueda-por-empelado></app-busqueda-por-empelado>
+</div>
+<div class="collapse multi-collapse" id="formRecurso" [hidden]="!collapseEmpleado">
+  <app-busqueda-por-recurso></app-busqueda-por-recurso>
+</div>
+<!-- <div class="collapse multi-collapse" id="formAsignar">
+  <app-asignar></app-asignar>
+</div> -->
+
+<br><br><br>
