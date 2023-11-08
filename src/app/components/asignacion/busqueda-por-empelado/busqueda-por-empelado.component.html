@@ -20,10 +20,6 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="mb-3">
-            <label for="idEmpleado" class="form-label">Id Empleado</label>
-            <input class="form-control" id="idEmpleado" formControlName="idEmpleado">
-          </div>
         </div>
         <div class="container">
           <div class="float-sm-end float-md-end float-lg-end float-xl-end float-xxl-end">
@@ -31,22 +27,22 @@
           </div>
         </div>
     </form>
-    <div class="container mt-5" [hidden]="dataEmpleados.length === 0">
-      <table class="table table-bordered table-responsive">
+    <div class="container mt-5 table-responsive" [hidden]="dataEmpleados.length === 0">
+      <table class="table table-striped">
         <caption>Empleados</caption>
         <thead>
           <tr>
             <th scope="col">  </th>
-            <th scope="col">Id Empleado</th>
+            <th scope="col">Correo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido Paterno</th>
             <th scope="col">Apellido Materno</th>
           </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody>
           <tr *ngFor="let empleado of dataEmpleados">
-            <th scope="row"><input type="radio" class="form-check-input" id="empleado{{empleado.idEmpleado}}" name="empleado" (change)="eventEmpleado($event, empleado)"></th>
-            <th scope="row">{{ empleado.idEmpleado }}</th>
+            <td><input type="radio" class="form-check-input" id="empleado{{empleado.idEmpleado}}" name="empleado" (change)="eventEmpleado($event, empleado)"></td>
+            <td>{{ empleado.email }}</td>
             <td>{{ empleado.nombre }}</td>
             <td>{{ empleado.aPaterno }}</td>
             <td>{{ empleado.aMaterno }}</td>
@@ -58,8 +54,8 @@
   <hr>
 
   <div class="row" [hidden]="!isEmpleadoSeleccionado()">
-    <div class="container mt-5" [hidden]="dataRecursos.length === 0">
-      <table class="table table-bordered">
+    <div class="container mt-5 table-responsive" [hidden]="dataRecursos.length === 0">
+      <table class="table table-striped">
         <caption>Recursos</caption>
         <thead>
           <tr>
@@ -70,17 +66,17 @@
             <th scope="col">Modelo</th>
           </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody>
           <tr *ngFor="let recurso of dataRecursos">
-            <th scope="row" *ngIf="!isRecursoAsignado(recurso)">
+            <td *ngIf="!isRecursoAsignado(recurso)">
               <input
                 type="checkbox"
                 class="form-check-input"
                 id="asignar"
                 [checked]="recurso.isSeleccionado"
                 (change)="event($event, recurso)">
-            </th>
-            <th scope="row" *ngIf="isRecursoAsignado(recurso)" data-bs-toggle="tooltip" data-bs-placement="top" title="Recurso asignado a otro empleado">
+            </td>
+            <td *ngIf="isRecursoAsignado(recurso)" data-bs-toggle="tooltip" data-bs-placement="top" title="Recurso asignado a otro empleado">
               <input
                 type="checkbox"
                 class="form-check-input"
@@ -88,8 +84,8 @@
                 disabled
                 [checked]="recurso.isSeleccionado"
                 (change)="event($event, recurso)">
-            </th>
-            <th scope="row">{{ recurso.numSerie }}</th>
+            </td>
+            <td>{{ recurso.numSerie }}</td>
             <td>{{ recurso.recurso }}</td>
             <td>{{ recurso.marca }}</td>
             <td>{{ recurso.modelo }}</td>

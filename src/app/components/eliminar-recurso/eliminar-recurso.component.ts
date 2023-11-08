@@ -46,6 +46,7 @@ export class EliminarRecursoComponent {
       marca: this.recursoForm.get('marca')?.value,
       modelo: this.recursoForm.get('modelo')?.value,
       estatus: valorPorDefectoEstatus,
+      asignadoA: ''
     }
 
     if(this.id !== null){
@@ -86,5 +87,5 @@ export class EliminarRecursoComponent {
       })
     }
   }
-  
+
 }

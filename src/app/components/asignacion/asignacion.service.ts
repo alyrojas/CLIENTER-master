@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 export interface Empleado {
+  _id: string;
+  email?: string;
   idEmpleado: number|null;
   nombre: string;
   aPaterno: string;
@@ -16,7 +18,7 @@ export interface Recurso {
   marca: string;
   modelo: string;
   isSeleccionado?: boolean;
-  asignadoA?: number|null;
+  asignadoA?: string|null;
 }
 
 @Injectable({
@@ -54,7 +56,7 @@ export class AsignacionService {
     return retorno;
   }
 
-  filtrarRecursosPorEmpleado(idEmpleado: number): Promise<any> {
+  filtrarRecursosPorEmpleado(idEmpleado: string): Promise<any> {
     const retorno = firstValueFrom(this.httpClient.get(`${this.apiRecurso}/empleado?idEmpleado=${idEmpleado}`, {headers: this.headers}));
     return retorno;
   }

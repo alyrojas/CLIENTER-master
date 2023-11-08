@@ -69,8 +69,9 @@ export class BusquedaPorRecursoComponent implements OnInit {
       })
     }
     recurso.isSeleccionado = evento.target.checked;
-    const idEmpleado:number|null = recurso.asignadoA||null;
+    const idEmpleado:string|null = recurso.asignadoA||null;
     const empleado: Empleado = {
+      _id: '',
       aMaterno: '',
       aPaterno: '',
       idEmpleado: null,
@@ -89,12 +90,12 @@ export class BusquedaPorRecursoComponent implements OnInit {
     empleado.isSeleccionado = evento.target.checked;
   }
 
-  filtrarEmpleados(filtroEmpleado: Empleado, idEmpleado: number|null) {
+  filtrarEmpleados(filtroEmpleado: Empleado, idEmpleado: string|null) {
     this.dataEmpleados = [];
     this.asignacionService.getEmpleados(filtroEmpleado).then(
       (success) => {
         this.dataEmpleados = success.map((m: Empleado) => {
-          if(m.idEmpleado == idEmpleado) {
+          if(m._id == idEmpleado) {
             m.isSeleccionado = true;
           }
           return m;
@@ -110,6 +111,7 @@ export class BusquedaPorRecursoComponent implements OnInit {
       let empleado = this.dataEmpleados.find(f=> f.isSeleccionado);
       if(empleado === undefined) {
         empleado = {
+          _id: '',
           idEmpleado: null,
           aMaterno: '',
           aPaterno: '',

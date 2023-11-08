@@ -21,10 +21,10 @@
 
                   <ul class="nav nav-tabs">
                     <li class="nav-item">
-                      <a id="Existencias" class="nav-link active" (click)="mostrarDiv('SinFallos')" >Sin Problemas</a>
+                      <a id="Existencias" class="nav-link" [class.active]="mostrarSinFallos" (click)="mostrarDiv('SinFallos')" >Sin Problemas</a>
                     </li>
                     <li class="nav-item">
-                      <a id="SinExistencias" class="nav-link active" (click)="mostrarDiv('ConFallos')">Con Problemas</a>
+                      <a id="SinExistencias" class="nav-link" [class.active]="mostrarConFallos" (click)="mostrarDiv('ConFallos')">Con Problemas</a>
                     </li>
                   </ul>
 
@@ -97,7 +97,7 @@
                       </tbody>
                   </table>
                   </div>
-                 
+
 
 
               </div>

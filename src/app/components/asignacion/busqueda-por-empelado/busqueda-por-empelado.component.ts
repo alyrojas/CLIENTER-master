@@ -49,8 +49,8 @@ export class BusquedaPorEmpeladoComponent implements OnInit {
       })
     }
     empleado.isSeleccionado = evento.target.checked;
-    const idEmpleado:number = empleado.idEmpleado||-1;
-    if(idEmpleado !== -1) {
+    const idEmpleado:string = empleado._id;
+    if(idEmpleado) {
       this.filtrarRecursosPorEmpleado(idEmpleado);
     }
   }
@@ -64,7 +64,7 @@ export class BusquedaPorEmpeladoComponent implements OnInit {
     );
   }
 
-  filtrarRecursosPorEmpleado(idEmpleado: number) {
+  filtrarRecursosPorEmpleado(idEmpleado: string) {
     this.dataRecursos = [];
     this.asignacionService.filtrarRecursosPorEmpleado(idEmpleado).then(
       (success) => {
@@ -86,11 +86,11 @@ export class BusquedaPorEmpeladoComponent implements OnInit {
     const empleado = this.dataEmpleados.find(f=>f.isSeleccionado)
     if(empleado) {
       const recursos = this.dataRecursos.filter(f => {
-        if(f.asignadoA === empleado.idEmpleado && !f.isSeleccionado) {
+        if(f.asignadoA === empleado._id && !f.isSeleccionado) {
           f.asignadoA = null;
           return true;
-        } else if(f.isSeleccionado && f.asignadoA !== empleado.idEmpleado) {
-          f.asignadoA = empleado.idEmpleado;
+        } else if(f.isSeleccionado && f.asignadoA !== empleado._id) {
+          f.asignadoA = empleado._id;
           return true;
         }
         return false;
@@ -107,7 +107,8 @@ export class BusquedaPorEmpeladoComponent implements OnInit {
   }
 
   isRecursoAsignado(recurso: Recurso): boolean {
-    return recurso.asignadoA !== null && recurso.asignadoA !== undefined && recurso.asignadoA != this.dataEmpleados.find(f => f.isSeleccionado)?.idEmpleado
+    return recurso.asignadoA !== null && recurso.asignadoA !== undefined
+     && recurso.asignadoA !== '' && recurso.asignadoA !== this.dataEmpleados.find(f => f.isSeleccionado)?._id
   }
 
 }
